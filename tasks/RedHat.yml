@@ -1,0 +1,23 @@
+
+- name: ensure remi repository is installed  on Centos 6
+  yum: name=http://rpms.famillecollet.com/enterprise/6/remi/x86_64/remi-release-6.5-2.el6.remi.noarch.rpm
+  when: ansible_distribution_major_version == "6"
+
+- name: ensure remi repository is installed  on Centos 7
+  yum: name=http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+  when: ansible_distribution_major_version == "7"
+
+
+- name: ensure librdkafka is installed
+  yum: name={{item}} enablerepo=remi
+  with_items:
+    - librdkafka
+    - librdkafka-devel
+    - yajl-devel
+    - gcc
+    - gcc-c++
+    - zlib-devel
+    - cmake
+    
+
+

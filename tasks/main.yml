@@ -1,0 +1,16 @@
+---
+
+- include: Debian.yml
+  when: ansible_distribution in [ 'Debian' ]
+
+- include: RedHat.yml
+  when: ansible_distribution in [ 'RedHat' ]
+
+- name: download kafkacat repo
+  git: repo=https://github.com/edenhill/kafkacat.git
+       dest=/tmp/kafkacat
+
+- name: build and install kafkacat
+  shell: creates=/usr/local/bin/kafkacat ./bootstrap.sh && make install
+  args:
+    chdir: /tmp/kafkacat

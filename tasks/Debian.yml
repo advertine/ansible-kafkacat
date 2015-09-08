@@ -1,0 +1,10 @@
+
+- name: ensure librdkafka is installed
+  apt: name={{item}} 
+  with_items:
+    - librdkafka-dev
+    - libyajl-dev
+    - gcc
+    - g++
+    - zlib1g-dev
+    - cmake
